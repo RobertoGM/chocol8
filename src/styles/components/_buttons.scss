@@ -1,0 +1,15 @@
+@import '../abstracts/_variables';
+@import '../base/_typography';
+
+.primary-button {
+  @extend .font-bold;
+  @extend .font-uppercase;
+  @include pad-all(
+    4,
+    5,
+    4,
+    5
+  ); // if prototype followed strictly it would be: 16px, 21px, 13px, 21px
+  color: $white;
+  background-color: $theme-primary;
+}

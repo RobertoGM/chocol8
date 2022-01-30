@@ -1,0 +1,9 @@
+@import '../abstracts/_variables';
+@import '../base/_typography';
+
+.common-label {
+  font-size: $font-size;
+  line-height: $line-spacing;
+  letter-spacing: $character-spacing;
+  color: $black;
+}

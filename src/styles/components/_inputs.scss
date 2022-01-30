@@ -1,0 +1,13 @@
+@import '../abstracts/_variables';
+@import '../components/_labels.scss';
+
+.input-box {
+  & > span {
+    @extend .common-label;
+  }
+  input {
+    border: 1px solid $border-color;
+    background-color: white;
+    min-height: 54px;
+  }
+}

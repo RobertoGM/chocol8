@@ -1,0 +1,55 @@
+@import './_variables';
+
+// Paddings
+
+@mixin pad($n: 4) {
+  padding: $n * $spacing-multiplier;
+}
+
+@mixin pad-top($n: 4) {
+  padding-top: $n * $spacing-multiplier;
+}
+
+@mixin pad-right($n: 4) {
+  padding-right: $n * $spacing-multiplier;
+}
+
+@mixin pad-bottom($n: 4) {
+  padding-bottom: $n * $spacing-multiplier;
+}
+
+@mixin pad-left($n: 4) {
+  padding-left: $n * $spacing-multiplier;
+}
+
+@mixin pad-all($a: 4, $b: 4, $c: 4, $d: 4) {
+  padding: $a * $spacing-multiplier $b * $spacing-multiplier $c *
+    $spacing-multiplier $d * $spacing-multiplier;
+}
+
+// Margin
+
+@mixin push($n: 4) {
+  margin: $n * $spacing-multiplier;
+}
+
+@mixin push-top($n: 4) {
+  margin-top: $n * $spacing-multiplier;
+}
+
+@mixin push-right($n: 4) {
+  margin-right: $n * $spacing-multiplier;
+}
+
+@mixin push-bottom($n: 4) {
+  margin-bottom: $n * $spacing-multiplier;
+}
+
+@mixin push-left($n: 4) {
+  margin-left: $n * $spacing-multiplier;
+}
+
+@mixin push-all($a: 4, $b: 4, $c: 4, $d: 4) {
+  margin: $a * $spacing-multiplier $b * $spacing-multiplier $c *
+    $spacing-multiplier $d * $spacing-multiplier;
+}
