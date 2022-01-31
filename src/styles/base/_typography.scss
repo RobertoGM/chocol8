@@ -1,3 +1,18 @@
+
+@font-face {
+  font-family: 'PermanentMarker-regular';
+  src: url('../../assets/fonts/PermanentMarker-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Open-sans';
+  src: url('../../assets/fonts/OpenSans-Semibold.ttf');
+}
+
+.main-font {
+  font-family: Open-sans;
+}
+
 .font-bold {
   font-weight: bold;
 }

@@ -1,6 +1,17 @@
 <template>
-  <div>EDITOR PAGE</div>
+  <div>Open Sans</div>
+  <!-- img to be replaced with the actual editor -->
+  <img
+    class="preview_size"
+    src="../../assets/dev_choc-barWithTextPREVIEW-01.png"
+  />
   <input :value="frontText" @keyup="setFrontText" />
+
+  <!-- img to be replaced with the actual editor -->
+  <img
+    class="preview_size"
+    src="../../assets/dev_choc-barWithTextPREVIEW-02.png"
+  />
   <input :value="backText" @keyup="setBackText" />
 </template>
 
@@ -25,3 +36,6 @@ export default {
   },
 };
 </script>
+<style lang="scss">
+@import "../../styles/components/_images.scss";
+</style>
