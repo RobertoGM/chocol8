@@ -1,0 +1,15 @@
+@import '../abstracts/_variables';
+
+
+body {
+  background-image: url('../../assets/bg.jpg');
+  margin: 0;
+  background-repeat: no-repeat;
+  background-size: 100vw 100vh;
+}
+
+.base-layout {
+  margin-right: auto;
+  margin-left: auto;
+  max-width: $app-max-width;
+}

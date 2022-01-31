@@ -9,12 +9,17 @@
   src: url('../../assets/fonts/OpenSans-Semibold.ttf');
 }
 
+@font-face {
+  font-family: 'Open-sans-bold';
+  src: url('../../assets/fonts/OpenSans-ExtraBold.ttf');
+}
+
 .main-font {
   font-family: Open-sans;
 }
 
 .font-bold {
-  font-weight: bold;
+  font-family: Open-sans-bold;
 }
 
 .font-uppercase {
