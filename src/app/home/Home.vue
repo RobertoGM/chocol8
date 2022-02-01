@@ -1,7 +1,7 @@
 <template>
   <div class="home-main">
     <!-- img to be replaced with the default preview -->
-    <img src="../../assets/dev_choc-barWithTextPREVIEW-01.png" />
+    <img src="@/assets/dev_choc-barWithTextPREVIEW-01.png" />
     <div>
       <span
         >Hello Developer-to-be! Let's make some customised chocolate bar
@@ -20,9 +20,9 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../../styles/components/_images.scss";
-@import "../../styles/components/_labels.scss";
-@import "../../styles/components/_buttons.scss";
+@import "@/styles/components/_images.scss";
+@import "@/styles/components/_labels.scss";
+@import "@/styles/components/_buttons.scss";
 
 .home-main {
   display: flex;

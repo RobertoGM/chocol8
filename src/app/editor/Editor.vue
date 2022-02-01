@@ -1,25 +1,28 @@
 <template>
-  <div>Open Sans</div>
-  <!-- img to be replaced with the actual editor -->
-  <img
-    class="preview_size"
-    src="../../assets/dev_choc-barWithTextPREVIEW-01.png"
-  />
-  <input :value="frontText" @keyup="setFrontText" />
-
-  <!-- img to be replaced with the actual editor -->
-  <img
-    class="preview_size"
-    src="../../assets/dev_choc-barWithTextPREVIEW-02.png"
-  />
-  <input :value="backText" @keyup="setBackText" />
+  <div class="editor-main">
+    <BoxEditor
+      title="Write your text here / frontside"
+      :value="frontText"
+      @onEditorChange="setFrontText"
+    />
+    <span />
+    <BoxEditor
+      title="Write your text here / backside"
+      :value="backText"
+      @onEditorChange="setBackText"
+    />
+    <router-link class="primary-button-link" to="/preview">Ok</router-link>
+  </div>
 </template>
 
 <script>
 import store from "../../core/store";
+import BoxEditor from "./box-editor/Box-editor.vue";
 
 export default {
   name: "Editor",
+  components: { BoxEditor },
+
   data() {
     return {
       frontText: store.state.frontText,
@@ -27,15 +30,29 @@ export default {
     };
   },
   methods: {
-    setFrontText(ev) {
-      store.setfrontText(ev.target.value);
+    setFrontText(val) {
+      store.setfrontText(val);
     },
-    setBackText(ev) {
-      store.setBackText(ev.target.value);
+    setBackText(val) {
+      store.setBackText(val);
     },
   },
 };
 </script>
 <style lang="scss">
-@import "../../styles/components/_images.scss";
+@import "../../styles/components/_buttons.scss";
+@import "../../styles/abstracts/_mixins.scss";
+.editor-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  & > span {
+    @include push-top(8);
+  }
+
+  .primary-button-link {
+    @include push-top();
+  }
+}
 </style>
