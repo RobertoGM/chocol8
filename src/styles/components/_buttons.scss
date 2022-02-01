@@ -1,4 +1,5 @@
 @import '../abstracts/_variables';
+@import '../abstracts/_mixins';
 @import '../base/_typography';
 
 .primary-button {
@@ -15,4 +16,22 @@
   text-align: center;
   width: 168px;
   height: 50px;
+  border: 0;
+}
+
+.primary-button-link {
+  @extend .font-bold;
+  @extend .font-uppercase;
+  @include pad-all(
+    4,
+    5,
+    4,
+    5
+  ); // if prototype followed strictly it would be: 16px, 21px, 13px, 21px
+  color: $white;
+  background-color: $theme-primary;
+  text-align: center;
+  width: 168px;
+  border: 0;
+  text-decoration: none;
 }

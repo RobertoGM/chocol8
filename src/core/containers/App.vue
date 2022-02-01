@@ -25,6 +25,8 @@ export default {
 
 .main-body {
   @include pad();
+  @include pad-top(30);
+  @include pad-bottom(30);
   @extend .base-layout;
   background: rgba(255, 255, 255, 0.79);
 }

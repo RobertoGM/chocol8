@@ -1,7 +1,8 @@
 <template>
   <div class="header">
-    <!-- <router-link to="/preview">Preview</router-link> -->
-    <h1 class="title"><span>Package</span>Media</h1>
+    <router-link to="/">
+      <h1 class="title"><span>Package</span>Media</h1>
+    </router-link>
   </div>
 </template>
 
@@ -20,6 +21,9 @@ export default {
   text-align: center;
   height: $app-header-height;
   background-color: $white;
+  a {
+    text-decoration: none;
+  }
 }
 
 .title {
