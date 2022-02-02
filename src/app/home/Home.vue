@@ -1,21 +1,21 @@
 <template>
   <div class="home-main">
-    <!-- img to be replaced with the default preview -->
-    <img src="@/assets/dev_choc-barWithTextPREVIEW-01.png" />
+    <ImageEditor canvasId="home" :text="'your own text!'" :isFront="true" />
     <div>
       <span
         >Hello Developer-to-be! Let's make some customised chocolate bar
         covers.</span
       >
-      <!-- <button>start</button> -->
       <router-link class="primary-button-link" to="/editor">Start</router-link>
     </div>
   </div>
 </template>
 
 <script>
+import ImageEditor from "@/shared/imageEditor/ImageEditor";
 export default {
   name: "Home",
+  components: { ImageEditor },
 };
 </script>
 

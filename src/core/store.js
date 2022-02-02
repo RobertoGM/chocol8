@@ -2,11 +2,11 @@ import { reactive } from 'vue';
 
 export default {
   state: reactive({
-    frontText: 'f',
-    backText: 'b',
+    frontText: '',
+    backText: '',
   }),
 
-  setfrontText(newValue) {
+  setFrontText(newValue) {
     this.state.frontText = newValue;
   },
 

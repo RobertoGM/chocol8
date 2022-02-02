@@ -1,10 +1,6 @@
 <template>
   <div class="box-editor-main">
-    <!-- img to be replaced with the actual editor -->
-    <img
-      class="preview_size"
-      src="@/assets/dev_choc-barWithTextPREVIEW-01.png"
-    />
+    <ImageEditor :canvasId="canvasId" :text="value" :isFront="front" />
     <div class="box-field">
       <span>{{ title }}</span>
       <input
@@ -17,11 +13,17 @@
 </template>
 
 <script>
+import ImageEditor from "../../../shared/imageEditor/ImageEditor.vue";
 export default {
   name: "BoxEditor",
+  components: {
+    ImageEditor,
+  },
   props: {
+    canvasId: String,
     title: String,
     value: String,
+    front: Boolean,
   },
   emits: ["onEditorChange"],
 };
@@ -35,8 +37,8 @@ export default {
 .box-editor-main {
   display: flex;
   flex-direction: row;
-  img {
-    @include push-right(8);
+  input {
+    @include push-left(8);
   }
   .box-field {
     display: flex;

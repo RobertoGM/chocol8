@@ -1,14 +1,18 @@
 <template>
   <div class="editor-main">
     <BoxEditor
+      canvasId="front"
       title="Write your text here / frontside"
       :value="frontText"
+      :front="true"
       @onEditorChange="setFrontText"
     />
     <span />
     <BoxEditor
+      canvasId="back"
       title="Write your text here / backside"
       :value="backText"
+      :front="false"
       @onEditorChange="setBackText"
     />
     <router-link class="primary-button-link" to="/preview">Ok</router-link>
@@ -31,9 +35,11 @@ export default {
   },
   methods: {
     setFrontText(val) {
-      store.setfrontText(val);
+      this.frontText = val;
+      store.setFrontText(val);
     },
     setBackText(val) {
+      this.backText = val;
       store.setBackText(val);
     },
   },

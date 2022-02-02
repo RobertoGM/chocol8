@@ -1,16 +1,10 @@
 <template>
   <div class="preview-main">
     <div>
-      <img
-        class="preview_size"
-        src="@/assets/dev_choc-barWithTextPREVIEW-01.png"
-      />
-      {{ frontText }}
-      <img
-        class="preview_size"
-        src="@/assets/dev_choc-barWithTextPREVIEW-01.png"
-      />
-      {{ backText }}
+      <ImageEditor canvasId="front-preview" :text="frontText" :isFront="true" />
+      <span />
+
+      <ImageEditor canvasId="back-preview" :text="backText" :isFront="false" />
     </div>
     <div>
       <span class="common-label">Thanks! We are ready now :)</span>
@@ -21,8 +15,12 @@
 
 <script>
 import store from "../../core/store";
+import ImageEditor from "../../shared/imageEditor/ImageEditor.vue";
 export default {
   name: "Preview",
+  components: {
+    ImageEditor,
+  },
   data() {
     return {
       frontText: store.state.frontText,
@@ -44,6 +42,9 @@ export default {
     flex-direction: column;
     align-items: center;
     flex: 1;
+    & > span {
+      @include push-top(8);
+    }
   }
   .primary-button-link {
     @include push-top(20);
