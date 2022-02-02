@@ -25,9 +25,9 @@ export default {
       ctx.drawImage(imageObj, 0, 0, canvas.width, canvas.height);
       ctx.save();
       if (frontSide) {
-        ctx.font = "20pt PermanentMarker-regular";
+        ctx.font = "15pt PermanentMarker-regular";
       } else {
-        ctx.font = "15pt Open-sas";
+        ctx.font = "10pt Open-sas";
       }
       ctx.fillStyle = "#ffffff";
       ctx.textAlign = "center";
@@ -50,17 +50,24 @@ export default {
         ctx.drawImage(imageObj, 0, 0, canvas.width, canvas.height);
         ctx.save();
         if (frontSide) {
-          ctx.font = "20pt PermanentMarker-regular";
+          ctx.font = "15pt PermanentMarker-regular";
         } else {
-          ctx.font = "15pt Open-sas";
+          ctx.font = "10pt Open-sas";
         }
         ctx.fillStyle = "#ffffff";
         ctx.textAlign = "center";
-        ctx.translate(150, 80);
         if (frontSide) {
           ctx.rotate(-0.1 * Math.PI);
         }
-        ctx.fillText(newVal, 0, 0);
+        if (frontSide) {
+          ctx.translate(150, 80);
+          ctx.fillText(newVal, 0, 0);
+        } else {
+          ctx.translate(150, 50);
+          newVal.split(/\n/g).forEach((line, i) => {
+            ctx.fillText(line, 0, i * 20);
+          });
+        }
         ctx.restore();
       };
     },

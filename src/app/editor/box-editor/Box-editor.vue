@@ -3,9 +3,22 @@
     <ImageEditor :canvasId="canvasId" :text="value" :isFront="front" />
     <div class="box-field">
       <span>{{ title }}</span>
+
       <input
+        v-if="front"
         class="input-box"
+        maxlength="15"
         :value="value"
+        @keyup="$emit('onEditorChange', $event.target.value)"
+      />
+
+      <textarea
+        class="input-box"
+        v-else
+        :value="value"
+        cols="30"
+        rows="3"
+        wrap="hard"
         @keyup="$emit('onEditorChange', $event.target.value)"
       />
     </div>
@@ -37,8 +50,16 @@ export default {
 .box-editor-main {
   display: flex;
   flex-direction: row;
-  input {
+  input,
+  textarea {
     @include push-left(8);
+    @media only screen and (max-width: 425px) {
+      @include push-left(0);
+    }
+  }
+  textarea {
+    resize: none;
+    height: 100px;
   }
   .box-field {
     display: flex;
