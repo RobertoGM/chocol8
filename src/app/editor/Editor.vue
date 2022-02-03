@@ -1,31 +1,35 @@
 <template>
   <div class="editor-main">
-    <BoxEditor
-      canvasId="front"
-      title="Write your text here / frontside"
-      :front="true"
-      :value="frontText"
-      @textUpdated="frontText = $event"
-    />
-    <span />
-    <BoxEditor
-      canvasId="back"
-      title="Write your text here / backside"
-      :front="false"
-      :value="backText"
-      @textUpdated="backText = $event"
-    />
+    <div class="box-editor-main">
+      <div class="editor-section">
+        <ImageEditor canvasId="frontCanvas" :text="frontText" :isFront="true" />
+        <div class="box-field">
+          <span>Write your text here / frontside</span>
+          <input class="input-box" maxlength="15" v-model="frontText" />
+        </div>
+      </div>
+      <div class="editor-section">
+        <ImageEditor canvasId="backCanvas" :text="backText" :isFront="false" />
+        <div class="box-field">
+          <span>Write your text here / backside</span>
+          <textarea class="input-box" rows="3" v-model="backText" />
+        </div>
+      </div>
+    </div>
+
     <router-link class="primary-button-link" to="/preview">Ok</router-link>
   </div>
 </template>
 
 <script>
 import store from "../../core/store";
-import BoxEditor from "./box-editor/Box-editor.vue";
+import ImageEditor from "../../shared/imageEditor/ImageEditor.vue";
 
 export default {
   name: "Editor",
-  components: { BoxEditor },
+  components: {
+    ImageEditor,
+  },
   data() {
     return {
       frontText: store.state.frontText,
@@ -36,10 +40,18 @@ export default {
     frontText(val) {
       store.setFrontText(val);
     },
-    backText(val) {
-      // console.log(val.split(/\n/g));
-      // console.log(val.length);
-      store.setBackText(val);
+    backText(val, prevVal) {
+      var lines = val.split(/\n/g);
+
+      if (lines.length < 4) {
+        if (lines.some((l) => l.length > 10)) {
+          this.backText = prevVal;
+        }
+
+        store.setBackText(val);
+      } else {
+        this.backText = prevVal;
+      }
     },
   },
 };
@@ -47,6 +59,10 @@ export default {
 <style lang="scss">
 @import "../../styles/components/_buttons.scss";
 @import "../../styles/abstracts/_mixins.scss";
+
+@import "../../styles/components/_images.scss";
+@import "../../styles/components/_inputs.scss";
+
 .editor-main {
   display: flex;
   flex-direction: column;
@@ -56,8 +72,44 @@ export default {
     @include push-top(8);
   }
 
-  .primary-button-link {
-    @include push-top();
+  .box-editor-main {
+    display: flex;
+    flex-direction: column;
+
+    .editor-section {
+      display: flex;
+      flex-direction: row;
+      @include push-bottom(8);
+      input,
+      textarea {
+        @include push-left(8);
+        @media only screen and (max-width: 425px) {
+          @include push-left(0);
+        }
+      }
+      textarea {
+        resize: none;
+        height: 100px;
+      }
+      .box-field {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        & > span {
+          align-items: center;
+          @include push-bottom(6);
+        }
+      }
+    }
+
+    @media only screen and (max-width: 768px) {
+      flex-direction: column;
+      align-items: center;
+      img {
+        @include push-right(0);
+        @include push-bottom();
+      }
+    }
   }
 }
 </style>
