@@ -9,17 +9,15 @@
         class="input-box"
         maxlength="15"
         :value="value"
-        @keyup="$emit('onEditorChange', $event.target.value)"
+        @input="$emit('onEditorChange', $event.target.value)"
       />
 
       <textarea
         class="input-box"
         v-else
         :value="value"
-        cols="30"
         rows="3"
-        wrap="hard"
-        @keyup="$emit('onEditorChange', $event.target.value)"
+        @input="$emit('onEditorChange', $event.target.value)"
       />
     </div>
   </div>

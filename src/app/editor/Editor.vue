@@ -39,7 +39,7 @@ export default {
       store.setFrontText(val);
     },
     setBackText(val) {
-      console.log(val.split(/\n/g))
+      console.log(val.split(/\n/g));
       this.backText = val;
       store.setBackText(val);
     },
