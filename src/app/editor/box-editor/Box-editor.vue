@@ -1,6 +1,6 @@
 <template>
   <div class="box-editor-main">
-    <ImageEditor :canvasId="canvasId" :text="value" :isFront="front" />
+    <ImageEditor :canvasId="canvasId" :text="textValue" :isFront="front" />
     <div class="box-field">
       <span>{{ title }}</span>
 
@@ -8,16 +8,16 @@
         v-if="front"
         class="input-box"
         maxlength="15"
-        :value="value"
-        @input="$emit('onEditorChange', $event.target.value)"
+        :value="textValue"
+        @input="changeEvent"
       />
 
       <textarea
         class="input-box"
         v-else
-        :value="value"
         rows="3"
-        @input="$emit('onEditorChange', $event.target.value)"
+        :value="textValue"
+        @input="changeEvent"
       />
     </div>
   </div>
@@ -36,7 +36,21 @@ export default {
     value: String,
     front: Boolean,
   },
-  emits: ["onEditorChange"],
+  emits: ["textUpdated"],
+
+  data() {
+    return { textValue: this.value };
+  },
+  methods: {
+    changeEvent(e) {
+      this.$emit("textUpdated", e.target.value);
+    },
+  },
+  watch: {
+    value(newVal) {
+      this.textValue = newVal;
+    },
+  },
 };
 </script>
 

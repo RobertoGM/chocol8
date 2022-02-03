@@ -3,17 +3,17 @@
     <BoxEditor
       canvasId="front"
       title="Write your text here / frontside"
-      :value="frontText"
       :front="true"
-      @onEditorChange="setFrontText"
+      :value="frontText"
+      @textUpdated="frontText = $event"
     />
     <span />
     <BoxEditor
       canvasId="back"
       title="Write your text here / backside"
-      :value="backText"
       :front="false"
-      @onEditorChange="setBackText"
+      :value="backText"
+      @textUpdated="backText = $event"
     />
     <router-link class="primary-button-link" to="/preview">Ok</router-link>
   </div>
@@ -26,21 +26,19 @@ import BoxEditor from "./box-editor/Box-editor.vue";
 export default {
   name: "Editor",
   components: { BoxEditor },
-
   data() {
     return {
       frontText: store.state.frontText,
       backText: store.state.backText,
     };
   },
-  methods: {
-    setFrontText(val) {
-      this.frontText = val;
+  watch: {
+    frontText(val) {
       store.setFrontText(val);
     },
-    setBackText(val) {
-      console.log(val.split(/\n/g));
-      this.backText = val;
+    backText(val) {
+      // console.log(val.split(/\n/g));
+      // console.log(val.length);
       store.setBackText(val);
     },
   },

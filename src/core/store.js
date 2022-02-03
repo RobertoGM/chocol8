@@ -3,7 +3,7 @@ import { reactive } from 'vue';
 export default {
   state: reactive({
     frontText: '',
-    backText: 'hola\nnueva línea?',
+    backText: '',
   }),
 
   setFrontText(newValue) {
