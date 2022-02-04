@@ -12,7 +12,7 @@
         <ImageEditor canvasId="backCanvas" :text="backText" :isFront="false" />
         <div class="box-field">
           <span>Write your text here / backside</span>
-          <textarea class="input-box" rows="3" v-model="backText" />
+          <textarea class="input-box" v-model="backText" />
         </div>
       </div>
     </div>
@@ -44,11 +44,19 @@ export default {
       var lines = val.split(/\n/g);
 
       if (lines.length < 4) {
-        if (lines.some((l) => l.length > 10)) {
-          this.backText = prevVal;
+        if (val.length === 30 && val.length > prevVal.length) {
+          this.backText = val + "\n";
         }
 
-        store.setBackText(val);
+        if (val.length === 61 && val.length > prevVal.length) {
+          this.backText = val + "\n";
+        }
+
+        if (val.length > 92) {
+          this.backText = prevVal;
+        } else {
+          store.setBackText(val);
+        }
       } else {
         this.backText = prevVal;
       }

@@ -43,10 +43,9 @@ export default {
       imageObj.onload = function () {
         ctx.drawImage(imageObj, 0, 0, canvas.width, canvas.height);
         ctx.save();
-        ctx.font = "10pt Open-sas";
+        ctx.font = "8pt Open-sas";
         ctx.fillStyle = "#ffffff";
-        ctx.textAlign = "center";
-        ctx.translate(150, 50);
+        ctx.translate(60, 50);
         textInput.split(/\n/g).forEach((line, i) => {
           ctx.fillText(line, 0, i * 20);
         });
