@@ -25,6 +25,17 @@
 import store from "../../core/store";
 import ImageEditor from "../../shared/imageEditor/ImageEditor.vue";
 
+let regex = new RegExp(/^[a-z0-9\r\n]*$/i);
+
+String.prototype.splice = function (offset, text, removeCount = 0) {
+  let calculatedOffset = offset < 0 ? this.length + offset : offset;
+  return (
+    this.substring(0, calculatedOffset) +
+    text +
+    this.substring(calculatedOffset + removeCount)
+  );
+};
+
 export default {
   name: "Editor",
   components: {
@@ -37,22 +48,26 @@ export default {
     };
   },
   watch: {
-    frontText(val) {
-      store.setFrontText(val);
+    frontText(val, prevVal) {
+      if (regex.test(val)) {
+        store.setFrontText(val);
+      } else {
+        this.frontText = prevVal;
+      }
     },
     backText(val, prevVal) {
       var lines = val.split(/\n/g);
-
-      if (lines.length < 4) {
-        if (val.length === 30 && val.length > prevVal.length) {
-          this.backText = val + "\n";
+      let charLimit = 30;
+      if (lines.length < 4 && regex.test(val)) {
+        if (val.length > prevVal.length) {
+          lines.forEach((l, i) => {
+            if (val.length === charLimit * (i + 1) + i) {
+              this.backText = val + "\n";
+            }
+          });
         }
 
-        if (val.length === 61 && val.length > prevVal.length) {
-          this.backText = val + "\n";
-        }
-
-        if (val.length > 92) {
+        if (val.length > charLimit * 3 + 2) {
           this.backText = prevVal;
         } else {
           store.setBackText(val);
@@ -60,6 +75,28 @@ export default {
       } else {
         this.backText = prevVal;
       }
+
+      // let maxLength = 20;
+      // var lines = val.split("\n");
+
+      // for (var i = 0; i < lines.length; i++) {
+      //   if (lines[i].length > maxLength) {
+      //     lines[i] = lines[i].substring(0, maxLength);
+      //     if (lines[i + 1]) {
+      //       lines[i + 1].splice(0, lines[i].substring(maxLength - 1));
+      //     } else {
+      //       lines[i + 1] = lines[i].substring(maxLength);
+      //     }
+      //   }
+      // }
+
+      // if (lines.length < 4) {
+      //   let newVal = lines.join("\n");
+      //   this.backText = newVal;
+      //   store.setBackText(newVal);
+      // } else {
+      //   this.backText = prevVal;
+      // }
     },
   },
 };
