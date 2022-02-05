@@ -56,47 +56,27 @@ export default {
       }
     },
     backText(val, prevVal) {
-      var lines = val.split(/\n/g);
-      let charLimit = 30;
-      if (lines.length < 4 && regex.test(val)) {
-        if (val.length > prevVal.length) {
-          lines.forEach((l, i) => {
-            if (val.length === charLimit * (i + 1) + i) {
-              this.backText = val + "\n";
-            }
-          });
-        }
+      let maxLength = 30;
+      var lines = val.split("\n");
 
-        if (val.length > charLimit * 3 + 2) {
-          this.backText = prevVal;
-        } else {
-          store.setBackText(val);
+      for (var i = 0; i < lines.length; i++) {
+        if (lines[i].length >= maxLength && val.length > prevVal.length) {
+          lines[i] = lines[i].substring(0, maxLength);
+          if (lines[i + 1]) {
+            lines[i + 1].splice(0, lines[i].substring(maxLength));
+          } else {
+            lines[i + 1] = lines[i].substring(maxLength);
+          }
         }
-      } else {
-        this.backText = prevVal;
       }
 
-      // let maxLength = 20;
-      // var lines = val.split("\n");
+      while (lines.length > 3) {
+        lines.pop();
+      }
 
-      // for (var i = 0; i < lines.length; i++) {
-      //   if (lines[i].length > maxLength) {
-      //     lines[i] = lines[i].substring(0, maxLength);
-      //     if (lines[i + 1]) {
-      //       lines[i + 1].splice(0, lines[i].substring(maxLength - 1));
-      //     } else {
-      //       lines[i + 1] = lines[i].substring(maxLength);
-      //     }
-      //   }
-      // }
-
-      // if (lines.length < 4) {
-      //   let newVal = lines.join("\n");
-      //   this.backText = newVal;
-      //   store.setBackText(newVal);
-      // } else {
-      //   this.backText = prevVal;
-      // }
+      let newVal = lines.join("\n");
+      this.backText = newVal;
+      store.setBackText(newVal);
     },
   },
 };
@@ -125,6 +105,16 @@ export default {
       display: flex;
       flex-direction: row;
       @include push-bottom(8);
+
+      @media only screen and (max-width: 768px) {
+        flex-direction: column;
+        align-items: center;
+        img {
+          @include push-right(0);
+          @include push-bottom();
+        }
+      }
+
       input,
       textarea {
         @include push-left(8);
@@ -144,15 +134,6 @@ export default {
           align-items: center;
           @include push-bottom(6);
         }
-      }
-    }
-
-    @media only screen and (max-width: 768px) {
-      flex-direction: column;
-      align-items: center;
-      img {
-        @include push-right(0);
-        @include push-bottom();
       }
     }
   }
