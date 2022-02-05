@@ -5,19 +5,14 @@
         <ImageEditor canvasId="frontCanvas" :text="frontText" :isFront="true" />
         <div class="box-field">
           <span>Write your text here / frontside</span>
-          <input
-            id="input-front"
-            class="input-box"
-            maxlength="15"
-            v-model="frontText"
-          />
+          <input class="input-box" maxlength="15" v-model="frontText" />
         </div>
       </div>
       <div class="editor-section">
         <ImageEditor canvasId="backCanvas" :text="backText" :isFront="false" />
         <div class="box-field">
           <span>Write your text here / backside</span>
-          <textarea id="input-back" class="input-box" v-model="backText" />
+          <textarea class="input-box" v-model="backText" />
         </div>
       </div>
     </div>
@@ -116,6 +111,20 @@ export default {
         & > span {
           align-items: center;
           @include push-bottom(6);
+        }
+      }
+    }
+
+    // Grow 10% on hover
+    .editor-section:hover {
+      .preview_size {
+        width: 465px;
+        height: 181px;
+
+        @media only screen and (max-width: 400px) {
+          // Ratio of 0.75 for smallest phones
+          width: 317px;
+          height: 123px;
         }
       }
     }

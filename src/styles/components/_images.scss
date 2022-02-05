@@ -1,6 +1,7 @@
 .preview_size {
   width: 423px;
   height: 165px;
+  transition: 2s;
 
   @media only screen and (max-width: 400px) {
     // Ratio of 0.75 for smallest phones
