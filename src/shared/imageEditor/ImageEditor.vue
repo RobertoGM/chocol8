@@ -43,7 +43,7 @@ export default {
       imageObj.onload = function () {
         ctx.drawImage(imageObj, 0, 0, canvas.width, canvas.height);
         ctx.save();
-        ctx.font = "8pt Open-sans";
+        ctx.font = "6pt Open-sans";
         ctx.fillStyle = "#ffffff";
         ctx.translate(60, 50);
         textInput.split(/\n/g).forEach((line, i) => {
