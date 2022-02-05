@@ -5,14 +5,19 @@
         <ImageEditor canvasId="frontCanvas" :text="frontText" :isFront="true" />
         <div class="box-field">
           <span>Write your text here / frontside</span>
-          <input class="input-box" maxlength="15" v-model="frontText" />
+          <input
+            id="input-front"
+            class="input-box"
+            maxlength="15"
+            v-model="frontText"
+          />
         </div>
       </div>
       <div class="editor-section">
         <ImageEditor canvasId="backCanvas" :text="backText" :isFront="false" />
         <div class="box-field">
           <span>Write your text here / backside</span>
-          <textarea class="input-box" v-model="backText" />
+          <textarea id="input-back" class="input-box" v-model="backText" />
         </div>
       </div>
     </div>
