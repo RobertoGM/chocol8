@@ -24,16 +24,12 @@
 <script>
 import store from "../../core/store";
 import ImageEditor from "../../shared/imageEditor/ImageEditor.vue";
+import { splitLines } from "../../shared/utils";
 
 let regex = new RegExp(/^[a-z0-9\r\n]*$/i);
 
-String.prototype.splice = function (offset, text, removeCount = 0) {
-  let calculatedOffset = offset < 0 ? this.length + offset : offset;
-  return (
-    this.substring(0, calculatedOffset) +
-    text +
-    this.substring(calculatedOffset + removeCount)
-  );
+String.prototype.insertString = function (index, text) {
+  return this.substring(0, index) + text + this.substring(index);
 };
 
 export default {
@@ -56,25 +52,7 @@ export default {
       }
     },
     backText(val, prevVal) {
-      let maxLength = 30;
-      var lines = val.split("\n");
-
-      for (var i = 0; i < lines.length; i++) {
-        if (lines[i].length >= maxLength && val.length > prevVal.length) {
-          lines[i] = lines[i].substring(0, maxLength);
-          if (lines[i + 1]) {
-            lines[i + 1].splice(0, lines[i].substring(maxLength));
-          } else {
-            lines[i + 1] = lines[i].substring(maxLength);
-          }
-        }
-      }
-
-      while (lines.length > 3) {
-        lines.pop();
-      }
-
-      let newVal = lines.join("\n");
+      let newVal = splitLines(val, prevVal, 30, 3);
       this.backText = newVal;
       store.setBackText(newVal);
     },
